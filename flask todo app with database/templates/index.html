@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo app</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+
+</head>
+<body>
+    <div style="margin:50px;" class="ui container">
+
+    <h1  class="ui center aligned header">Todo App</h1>
+    <form class="ui form" action="/add" method="POST"> 
+        <div class="field" >
+            <label  style="margin-left: 10px;" for="title">To Do title</label>
+            <div class="ui input focus">
+            <input  type="text" name="title" placeholder="Enter todo ....">
+            </div>
+            <br>
+            <button class="ui green button" type="submit">ADD</button>  
+        </div>
+    </form>
+
+    {% for todo in todo_list %}
+    <div class="ui segment"> 
+        <p class="ui big header"> {{ todo.id }} | {{todo.title}} </p>
+    
+        {% if todo.complete == False %}
+            <span class="ui gray label">not completed</span>
+        {% else %}
+            <span class="ui gray label">Completed</span>
+        {% endif %}
+
+        <a class="ui blue button" href="/update/{{ todo.id }}">Update</a>
+        <a class="ui red button " href="/delete/{{ todo.id }}">Delete</a>
+    </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
